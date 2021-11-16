@@ -1,10 +1,26 @@
+# Overview 
+- [Introduction to Data Models](#introduction-to-data-models)
+- [Data Dictionary](#data-dictionary)
+   - [Data Dictionary Structure](#data-dictionary-structure)
+   - [Node Properties and Examples](#node-properties-and-examples)
+   - [Dictionary Changes](#dictionary-changes)
+      - [Breaking Changes](#breaking-changes)
+      - [Entity Relation Additions](#entity-relation-additions)
+      - [Schema Additions](#schema-additions)
+      - [Cosmetic Corrections](#cosmetic-corrections)
+      - [Testing](#testing)
+      - [Versioning](#versioning)
+
+
 # Introduction to Data Models
 
-Every Gen3 data commons employs a data model, which serves to describe, organize, and harmonize data sets submitted by different users. Data harmonization facilitates cross-project analyses and is thus one of the pillars of the data commons paradigm.
+Every Gen3 data commons employs a data model/data dictionary, which serves to describe, organize, and harmonize data sets submitted by different users. Data harmonization facilitates cross-project analyses and is thus one of the pillars of the data commons paradigm.
 
 The data model organizes experimental metadata variables, “properties”, into linked categories, “nodes”, through the use of a data dictionary. The data dictionary lists and describes all nodes in the data model, as well as defines and describes the properties in each node.
 
-A data commons is powered by the Gen3 software stack. For more information on Gen3, visit the documentation at https://gen3.org. For more details about how Gen3 uses a data model and how the data dictionary should be formatted, see https://gen3.org/resources/user/dictionary/ and https://gen3.org/resources/operator/#3-creating-a-new-data-dictionary.
+A data commons is powered by the Gen3 software stack. For more information on Gen3, visit the documentation at https://gen3.org. 
+
+> 🟢 Note: This documentation is aimed towards handling a data dictionary on GitHub. For more thorough details about how Gen3 uses a data model and how the data dictionary should be formatted and created, see https://gen3.org/resources/user/dictionary/ and https://gen3.org/resources/operator/#3-creating-a-new-data-dictionary.
 
 # Data Dictionary
 
@@ -23,10 +39,11 @@ the data model as well as providing a clear and concise representation of the da
 
 Beyond node type, there are also a number of extensions used to further define the nodes within
 the data model. Nodes are grouped up into categories that represent broad roles for the node such
-as `subject` or `sample`. Additionally, nodes are defined within their `Program` or `Project`
-and have descriptions of their use. All nodes also have a series of `systemProperties`; these
+as `Administrative`, `Clinical`, or `Biospecimen` (more information [here](https://gen3.org/resources/operator/#3-creating-a-new-data-dictionary)).
+
+Additionally, nodes are defined within their `Program` or `Project` and have descriptions of their use (more information on programs and projects [here](https://gen3.org/resources/user/access-data/#the-data-commons-website)). All nodes also have a series of `systemProperties`; these
 properties are those that will be automatically filled by the system unless otherwise defined by
-the user.  These basic properties define the node itself but still need to be placed into the model.
+the user. These basic properties define the node itself but still need to be placed into the model.
 
 The model itself is represented as a graph. Within the schema are defined `links`; these links
 point from child to parent with Program being the root of the graph. The links also contain a
@@ -59,9 +76,9 @@ allowable data is invalid against the new schema, e.g. a **removal** of
 part of the dictionary.
 
 N.B. That not all changes classified here as Breaking Changes are
-promised to require a data migration.  It is possible that no data
+promised to require a data migration. It is possible that no data
 exists in the GDC that is invalidated by the change, e.g. making a
-field required that has never been left blank.  This should be
+field required that has never been left blank. This should be
 confirmed against the corpus of data and the userbase should be
 notified of a break in backwards-compatibility.
 
@@ -84,7 +101,7 @@ notified of a break in backwards-compatibility.
 **Handling breaking changes**:
 
 Sometimes it may be best to introduce necessary breaking changes
-incrementally.  Given you have State A and State B, which are
+incrementally. Given you have State A and State B, which are
 incomatible, if you can create a State AB that is compatible with
 both, you can upgrade to State AB without breaking changes, update
 data to be compliant with State B, then upgrade to State B.
@@ -145,7 +162,7 @@ effects.
 ### Testing
 
 Commits will automagically be run on TravisCI when a Pull Request is opened.
-If you would like to test locally they are run via [tox](https://tox.readthedocs.io/en/latest/)
+If you would like to test locally they are run via [dictionaryutils](https://github.com/uc-cdis/dictionaryutils).
 
 
 ### Versioning
